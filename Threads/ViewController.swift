@@ -13,6 +13,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+//        let objcThread = ObjectiveCThreading.init()
+//        objcThread.runSerialQueueThread()
+        
+        //swift threading testing
+        let swiftThread = SwiftThreading.init()
+        swiftThread.runCustomThreadSerial()
     }
 
 
