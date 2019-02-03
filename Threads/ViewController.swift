@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         
         //swift threading testing
         let swiftThread = SwiftThreading.init()
-        swiftThread.runCustomThreadSerial()
+        swiftThread.runCustomQueueWithAllParam()
     }
 
 

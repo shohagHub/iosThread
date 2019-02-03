@@ -9,6 +9,13 @@
 import UIKit
 
 class SwiftThreading: NSObject {
+    /*
+     Difference between sync and async call
+      ->when async is called the line after the thread call
+      will immendiately executed.
+      ->when sync is called the line after the thread call will be executed
+     when thread finishes it's job
+     */
     
     func runThread1(){
         DispatchQueue.global().async {
@@ -19,9 +26,10 @@ class SwiftThreading: NSObject {
         DispatchQueue.global().async {
             self.runHeavyTask2()
         }
+//        DispatchQueue.global(qos: .background)
     }
     
-    func runCustomThread(){
+    func runCustomQueueThreadConcurrent(){
         let concurrentQueue = DispatchQueue.init(label: "com.shohag", attributes: .concurrent)
         concurrentQueue.async {
             self.runHeavyTask1()
@@ -31,12 +39,23 @@ class SwiftThreading: NSObject {
         }
     }
     
-    func runCustomThreadSerial(){
+    func runCustomQueueThreadSerial(){
         let serialQueue = DispatchQueue.init(label: "com.shohag")
         serialQueue.async {
             self.runHeavyTask1()
         }
         serialQueue.async {
+            self.runHeavyTask2()
+            
+        }
+    }
+    
+    func runCustomQueueWithAllParam(){
+        let queue = DispatchQueue.init(label: "com.shoag", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
+        queue.async {
+            self.runHeavyTask1()
+        }
+        queue.async {
             self.runHeavyTask2()
         }
     }
